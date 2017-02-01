@@ -1,11 +1,15 @@
 'use strict';
 
+const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 
-const messages = require('./routes/classifieds');
+const classifieds = require('./routes/classifieds');
+app.use(express.static('public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
-app.use('/classifieds',messages);
+app.use('/classifieds', classifieds);
 
 const port = process.env.PORT || 3000;
 
